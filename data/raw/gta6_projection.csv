@@ -1,0 +1,4 @@
+Scenario,Expected_Copies_Sold_Million,Average_Selling_Price_INR,Expected_Revenue_INR_Crore,Launch_Year,Assumption
+Conservative,30,5000,,2026,Lower than expected demand
+Expected,40,5000,,2026,Strong launch based on current hype
+Optimistic,50,5000,,2026,Record-breaking launch
