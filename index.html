@@ -226,6 +226,43 @@
     margin-top:3px; font-family:var(--mono); font-size:9.5px; letter-spacing:1px; color:var(--text-dim); text-transform:uppercase;
   }
 
+  /* --- Sources panel --- */
+  .sources-panel {
+    flex: 0 0 auto; z-index: 1;
+    padding: 8px 14px 10px;
+    border-top: 1px solid var(--border);
+  }
+  .sources-panel .src-title {
+    font-family: var(--mono); font-size: 8.5px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--amber); margin-bottom: 6px;
+  }
+  .sources-panel .src-list {
+    display: flex; flex-wrap: wrap; gap: 4px 6px;
+    list-style: none;
+  }
+  .sources-panel .src-list li {
+    font-family: var(--mono); font-size: 8.5px;
+    color: var(--text-dim); letter-spacing: 0.4px;
+    padding: 2px 8px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(255,255,255,0.02);
+    transition: all 0.25s ease;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .sources-panel .src-list li:hover {
+    border-color: var(--border-hover);
+    color: var(--text);
+    background: rgba(255,255,255,0.04);
+  }
+  .sources-panel .src-list li .src-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
   
 
   /* --- Card & Corner styling --- */
@@ -336,16 +373,15 @@
   }
   .kpi-icon {
     width: 28px; height: 28px;
-    border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
     font-size: 13px;
   }
-  .kpi-card:nth-child(1) .kpi-icon { background: var(--amber-dim); color: var(--amber); }
-  .kpi-card:nth-child(2) .kpi-icon { background: var(--purple-dim); color: var(--purple); }
-  .kpi-card:nth-child(3) .kpi-icon { background: var(--pink-dim); color: var(--pink); }
-  .kpi-card:nth-child(4) .kpi-icon { background: var(--teal-dim); color: var(--teal); }
-  .kpi-card:nth-child(5) .kpi-icon { background: var(--cyan-dim); color: var(--cyan); }
-  .kpi-card:nth-child(6) .kpi-icon { background: var(--orange-dim); color: var(--orange); }
+  .kpi-card:nth-child(1) .kpi-icon { color: var(--amber); }
+  .kpi-card:nth-child(2) .kpi-icon { color: var(--purple); }
+  .kpi-card:nth-child(3) .kpi-icon { color: var(--pink); }
+  .kpi-card:nth-child(4) .kpi-icon { color: var(--teal); }
+  .kpi-card:nth-child(5) .kpi-icon { color: var(--cyan); }
+  .kpi-card:nth-child(6) .kpi-icon { color: var(--orange); }
 
   .kpi-value {
     font-family: var(--disp); font-weight: 700;
@@ -550,6 +586,68 @@
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; transition: none !important; }
   }
+
+  /* ——— Tab Navigation & Content ——— */
+  .tabs-nav {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    flex: 0 0 auto;
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    font-family: var(--disp);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--text-dim);
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.01);
+    user-select: none;
+  }
+  .tab-btn:hover {
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.03);
+    border-color: var(--border);
+  }
+  .tab-btn.active {
+    color: var(--amber);
+    background: rgba(242, 169, 59, 0.06);
+    border-color: rgba(242, 169, 59, 0.2);
+    box-shadow: 0 0 15px rgba(242, 169, 59, 0.05);
+  }
+  .tab-btn .tab-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--text-faint);
+    display: inline-block;
+    transition: all 0.25s ease;
+  }
+  .tab-btn.active .tab-dot {
+    background: var(--amber);
+    box-shadow: 0 0 8px var(--amber);
+  }
+  
+  .tab-content {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    min-height: 0;
+  }
+  .tab-content.active {
+    display: flex;
+  }
 </style>
 </head>
 <body>
@@ -590,131 +688,312 @@
         <div class="h-title">GRAND THEFT <span>AUTO VI</span></div>
         <div class="h-sub">Rockstar Games · Launch Year 2026</div>
       </div>
+      <div class="sources-panel">
+        <div class="src-title">📊 Data Sources</div>
+        <ul class="src-list">
+          <li><span class="src-dot" style="background:#ff0000"></span>YouTube</li>
+          <li><span class="src-dot" style="background:#4285f4"></span>Google Trends</li>
+          <li><span class="src-dot" style="background:#9b6bff"></span>VGChartz</li>
+          <li><span class="src-dot" style="background:#2fe6c4"></span>Statista</li>
+          <li><span class="src-dot" style="background:#ff3d7f"></span>Rockstar IR</li>
+          <li><span class="src-dot" style="background:#f2a93b"></span>SteamDB</li>
+        </ul>
+      </div>
     </div>
 
     <!-- Right content -->
     <div class="right-content">
-      <!-- KPI Row -->
-      <div class="kpi-row">
-        <div class="kpi-card" style="animation-delay:0.35s">
-          <div class="corner-tl"></div><div class="corner-br"></div>
-          <div class="kpi-top">
-            <div class="kpi-label">GTA V TOTAL SALES</div>
-            <div class="kpi-icon">📀</div>
-          </div>
-          <div class="kpi-value"><span id="kpiCopies">0</span><small>MILLION</small></div>
-          <div class="kpi-sub">Cumulative copies sold</div>
-          <canvas class="kpi-spark" id="sparkCopies"></canvas>
+      <!-- Tab Navigation -->
+      <div class="tabs-nav">
+        <div class="tab-btn active" data-tab="hype">
+          <span class="tab-dot"></span>HYPE & ENGAGEMENT
         </div>
-        <div class="kpi-card" style="animation-delay:0.45s">
-          <div class="corner-tl"></div><div class="corner-br"></div>
-          <div class="kpi-top">
-            <div class="kpi-label">GTA V REVENUE</div>
-            <div class="kpi-icon">💰</div>
-          </div>
-          <div class="kpi-value">₹<span id="kpiRevenue">0</span><small>CRORE</small></div>
-          <div class="kpi-sub">Estimated total revenue</div>
-          <canvas class="kpi-spark" id="sparkRevenue"></canvas>
+        <div class="tab-btn" data-tab="financials">
+          <span class="tab-dot"></span>FINANCIALS & BUDGETS
         </div>
-        <div class="kpi-card" style="animation-delay:0.55s">
-          <div class="corner-tl"></div><div class="corner-br"></div>
-          <div class="kpi-top">
-            <div class="kpi-label">VI PEAK INTEREST</div>
-            <div class="kpi-icon">🔥</div>
-          </div>
-          <div class="kpi-value"><span id="kpiPeak">0</span><small>INDEX</small></div>
-          <div class="kpi-sub" id="kpiPeakSub">Loading...</div>
-          <canvas class="kpi-spark" id="sparkPeak"></canvas>
-        </div>
-        <div class="kpi-card" style="animation-delay:0.65s">
-          <div class="corner-tl"></div><div class="corner-br"></div>
-          <div class="kpi-top">
-            <div class="kpi-label">VI LAUNCH REVENUE</div>
-            <div class="kpi-icon">🚀</div>
-          </div>
-          <div class="kpi-value">₹<span id="kpiProj">0</span><small>CR</small></div>
-          <div class="kpi-sub" id="kpiProjSub">Loading...</div>
-          <canvas class="kpi-spark" id="sparkProj"></canvas>
-        </div>
-        <div class="kpi-card" style="animation-delay:0.75s">
-          <div class="corner-tl"></div><div class="corner-br"></div>
-          <div class="kpi-top">
-            <div class="kpi-label">VI TRAILER VIEWS</div>
-            <div class="kpi-icon">📺</div>
-          </div>
-          <div class="kpi-value"><span id="kpiViews">0</span><small>MILLION</small></div>
-          <div class="kpi-sub">+119.5% vs GTA V Trailer</div>
-          <canvas class="kpi-spark" id="sparkViews"></canvas>
-        </div>
-        <div class="kpi-card" style="animation-delay:0.85s">
-          <div class="corner-tl"></div><div class="corner-br"></div>
-          <div class="kpi-top">
-            <div class="kpi-label">VI TRAILER LIKES</div>
-            <div class="kpi-icon">👍</div>
-          </div>
-          <div class="kpi-value"><span id="kpiLikes">0</span><small>MILLION</small></div>
-          <div class="kpi-sub">+335.9% vs GTA V Trailer</div>
-          <canvas class="kpi-spark" id="sparkLikes"></canvas>
+        <div class="tab-btn" data-tab="projections">
+          <span class="tab-dot"></span>PROJECTIONS & FORECASTS
         </div>
       </div>
 
-      <!-- Charts -->
-      <div class="charts-grid">
-        <!-- Trailer comparison -->
-        <div class="chart-card" style="animation-delay:0.5s">
-          <div class="card-head">
-            <div class="card-title">Trailer Showdown<small>GTA V vs GTA VI · YouTube</small></div>
-            <div class="chip-row" id="trailerMetricChips">
-              <div class="chip active" data-metric="Views">Views</div>
-              <div class="chip" data-metric="Likes">Likes</div>
-              <div class="chip" data-metric="Comments">Comments</div>
+      <!-- Tab 1: Hype & Engagement -->
+      <div class="tab-content active" id="tab-hype">
+        <!-- KPI Row -->
+        <div class="kpi-row">
+          <div class="kpi-card" style="animation-delay:0.1s">
+            <div class="corner-tl"></div><div class="corner-br"></div>
+            <div class="kpi-top">
+              <div class="kpi-label">VI TRAILER VIEWS</div>
+            </div>
+            <div class="kpi-value"><span id="kpiViews">0</span><small>MILLION</small></div>
+            <div class="kpi-sub">+119.5% vs GTA V Trailer</div>
+            <canvas class="kpi-spark" id="sparkViews"></canvas>
+          </div>
+          <div class="kpi-card" style="animation-delay:0.15s">
+            <div class="corner-tl"></div><div class="corner-br"></div>
+            <div class="kpi-top">
+              <div class="kpi-label">VI PEAK INTEREST</div>
+            </div>
+            <div class="kpi-value"><span id="kpiPeak">0</span><small>INDEX</small></div>
+            <div class="kpi-sub" id="kpiPeakSub">Loading...</div>
+            <canvas class="kpi-spark" id="sparkPeak"></canvas>
+          </div>
+          <div class="kpi-card" style="animation-delay:0.2s">
+            <div class="corner-tl"></div><div class="corner-br"></div>
+            <div class="kpi-top">
+              <div class="kpi-label">SOCIAL BUZZ MULTIPLIER</div>
+            </div>
+            <div class="kpi-value"><span id="kpiSocial">5.2</span><small>x</small></div>
+            <div class="kpi-sub">GTA VI vs GTA V social activity</div>
+            <canvas class="kpi-spark" id="sparkSocial"></canvas>
+          </div>
+          <div class="kpi-card" style="animation-delay:0.25s">
+            <div class="corner-tl"></div><div class="corner-br"></div>
+            <div class="kpi-top">
+              <div class="kpi-label">INSTAGRAM REELS BUZZ</div>
+            </div>
+            <div class="kpi-value"><span id="kpiInstagram">0</span><small>BILLION</small></div>
+            <div class="kpi-sub">Total Hashtag Reel views</div>
+            <canvas class="kpi-spark" id="sparkInstagram"></canvas>
+          </div>
+          <div class="kpi-card" style="animation-delay:0.3s">
+            <div class="corner-tl"></div><div class="corner-br"></div>
+            <div class="kpi-top">
+              <div class="kpi-label">REDDIT SUBSCRIBERS</div>
+            </div>
+            <div class="kpi-value"><span id="kpiReddit">0</span><small>MILLION</small></div>
+            <div class="kpi-sub">+50.0% vs GTA V Reddit</div>
+            <canvas class="kpi-spark" id="sparkReddit"></canvas>
+          </div>
+          <div class="kpi-card" style="animation-delay:0.35s">
+            <div class="corner-tl"></div><div class="corner-br"></div>
+            <div class="kpi-top">
+              <div class="kpi-label">X TRAILER LIKES</div>
+            </div>
+            <div class="kpi-value"><span id="kpiXTweets">0</span><small>MILLION</small></div>
+            <div class="kpi-sub">+276.5% vs GTA V Twitter</div>
+            <canvas class="kpi-spark" id="sparkXTweets"></canvas>
+          </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="charts-grid">
+          <!-- Trailer comparison -->
+          <div class="chart-card" style="animation-delay:0.5s">
+            <div class="card-head">
+              <div class="card-title">Trailer Showdown<small>GTA V vs GTA VI · YouTube</small></div>
+              <div class="chip-row" id="trailerMetricChips">
+                <div class="chip active" data-metric="Views">Views</div>
+                <div class="chip" data-metric="Likes">Likes</div>
+                <div class="chip" data-metric="Comments">Comments</div>
+              </div>
+            </div>
+            <div class="chart-box"><canvas id="trailerChart"></canvas></div>
+            <div class="foot-stats">
+              <div class="foot-stat">GTA V<b id="trailerVLabel">—</b></div>
+              <div class="foot-stat">GTA VI<b id="trailerVILabel">—</b></div>
+              <div class="foot-stat">Growth<b id="trailerGrowthLabel">—</b></div>
             </div>
           </div>
-          <div class="chart-box"><canvas id="trailerChart"></canvas></div>
-          <div class="foot-stats">
-            <div class="foot-stat">GTA V<b id="trailerVLabel">—</b></div>
-            <div class="foot-stat">GTA VI<b id="trailerVILabel">—</b></div>
-            <div class="foot-stat">Growth<b id="trailerGrowthLabel">—</b></div>
-          </div>
-        </div>
 
-        <!-- Google Trends -->
-        <div class="chart-card" style="animation-delay:0.6s">
-          <div class="card-head">
-            <div class="card-title">Search Demand<small>Google Trends · Weekly</small></div>
-            <div class="chip-row" id="trendRangeChips">
-              <div class="chip" data-range="26">6M</div>
-              <div class="chip" data-range="52">1Y</div>
-              <div class="chip" data-range="104">2Y</div>
-              <div class="chip active" data-range="all">ALL</div>
+          <!-- Google Trends -->
+          <div class="chart-card" style="animation-delay:0.6s">
+            <div class="card-head">
+              <div class="card-title">Search Demand<small>Google Trends · Weekly</small></div>
+              <div class="chip-row" id="trendRangeChips">
+                <div class="chip" data-range="26">6M</div>
+                <div class="chip" data-range="52">1Y</div>
+                <div class="chip" data-range="104">2Y</div>
+                <div class="chip active" data-range="all">ALL</div>
+              </div>
             </div>
+            <div class="chart-box"><canvas id="trendChart"></canvas></div>
           </div>
-          <div class="chart-box"><canvas id="trendChart"></canvas></div>
+
+          <!-- Social Buzz -->
+          <div class="chart-card" style="animation-delay:0.7s; grid-column: span 2;">
+            <div class="card-head">
+              <div class="card-title">Social Buzz Comparison<small>Reddit subscribers, Twitter likes & Instagram Views</small></div>
+            </div>
+            <div class="chart-box" style="height: 220px;"><canvas id="socialChart"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Financials & Budgets -->
+      <div class="tab-content" id="tab-financials">
+        <!-- KPI Row -->
+        <div class="kpi-row">
+          <div class="kpi-card" style="animation-delay:0.1s">
+            <div class="corner-tl"></div><div class="corner-br"></div>
+            <div class="kpi-top">
+              <div class="kpi-label">GTA V TOTAL SALES</div>
+            </div>
+            <div class="kpi-value"><span id="kpiCopies">0</span><small>MILLION</small></div>
+            <div class="kpi-sub">Cumulative copies sold</div>
+            <canvas class="kpi-spark" id="sparkCopies"></canvas>
+          </div>
+          <div class="kpi-card" style="animation-delay:0.15s">
+            <div class="corner-tl"></div><div class="corner-br"></div>
+            <div class="kpi-top">
+              <div class="kpi-label">GTA V REVENUE</div>
+            </div>
+            <div class="kpi-value">₹<span id="kpiRevenue">0</span><small>CRORE</small></div>
+            <div class="kpi-sub">Estimated total revenue</div>
+            <canvas class="kpi-spark" id="sparkRevenue"></canvas>
+          </div>
+          <div class="kpi-card" style="animation-delay:0.2s">
+            <div class="corner-tl"></div><div class="corner-br"></div>
+            <div class="kpi-top">
+              <div class="kpi-label">VI EST. TOTAL BUDGET</div>
+            </div>
+            <div class="kpi-value">₹<span id="kpiBudget">0</span><small>CRORE</small></div>
+            <div class="kpi-sub">Estimated total budget (~$1B USD)</div>
+            <canvas class="kpi-spark" id="sparkBudget"></canvas>
+          </div>
+          <div class="kpi-card" style="animation-delay:0.25s">
+            <div class="corner-tl"></div><div class="corner-br"></div>
+            <div class="kpi-top">
+              <div class="kpi-label">VI EST. DEV BUDGET</div>
+            </div>
+            <div class="kpi-value">₹<span id="kpiDevBudget">0</span><small>CRORE</small></div>
+            <div class="kpi-sub">Development budget (~$600M)</div>
+            <canvas class="kpi-spark" id="sparkDevBudget"></canvas>
+          </div>
+          <div class="kpi-card" style="animation-delay:0.3s">
+            <div class="corner-tl"></div><div class="corner-br"></div>
+            <div class="kpi-top">
+              <div class="kpi-label">VI EST. MKT BUDGET</div>
+            </div>
+            <div class="kpi-value">₹<span id="kpiMktBudget">0</span><small>CRORE</small></div>
+            <div class="kpi-sub">Marketing budget (~$400M)</div>
+            <canvas class="kpi-spark" id="sparkMktBudget"></canvas>
+          </div>
+          <div class="kpi-card" style="animation-delay:0.35s">
+            <div class="corner-tl"></div><div class="corner-br"></div>
+            <div class="kpi-top">
+              <div class="kpi-label">VI EST. DAY-ONE SALES</div>
+            </div>
+            <div class="kpi-value"><span id="kpiLaunchDay">0</span><small>MILLION</small></div>
+            <div class="kpi-sub">Projected day-one copies</div>
+            <canvas class="kpi-spark" id="sparkLaunchDay"></canvas>
+          </div>
         </div>
 
-        <!-- GTA V Cumulative sales -->
-        <div class="chart-card" style="animation-delay:0.7s">
-          <div class="card-head">
-            <div class="card-title">GTA V Lifetime<small>Cumulative Sales & Revenue</small></div>
+        <!-- Charts Grid -->
+        <div class="charts-grid">
+          <!-- GTA V Cumulative sales -->
+          <div class="chart-card" style="animation-delay:0.6s">
+            <div class="card-head">
+              <div class="card-title">GTA V Lifetime Growth<small>Cumulative Copies & Revenue</small></div>
+            </div>
+            <div class="chart-box"><canvas id="cumulativeChart"></canvas></div>
           </div>
-          <div class="chart-box"><canvas id="cumulativeChart"></canvas></div>
+
+          <!-- Budget showdown -->
+          <div class="chart-card" style="animation-delay:0.7s">
+            <div class="card-head">
+              <div class="card-title">Budget Breakdown<small>GTA V vs GTA VI · Development & Marketing (USD)</small></div>
+            </div>
+            <div class="chart-box"><canvas id="budgetChart"></canvas></div>
+          </div>
+
+          <!-- Preorders comparison -->
+          <div class="chart-card" style="animation-delay:0.8s; grid-column: span 2;">
+            <div class="card-head">
+              <div class="card-title">Pre-Order & Launch Day Showdown<small>Bookings & Day-One Copies (Million)</small></div>
+            </div>
+            <div class="chart-box" style="height: 220px;"><canvas id="preorderChart"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Projections & Forecasts -->
+      <div class="tab-content" id="tab-projections">
+        <!-- KPI Row -->
+        <div class="kpi-row">
+          <div class="kpi-card" style="animation-delay:0.1s">
+            <div class="corner-tl"></div><div class="corner-br"></div>
+            <div class="kpi-top">
+              <div class="kpi-label">VI LAUNCH REVENUE</div>
+            </div>
+            <div class="kpi-value">₹<span id="kpiProj">0</span><small>CR</small></div>
+            <div class="kpi-sub" id="kpiProjSub">Loading...</div>
+            <canvas class="kpi-spark" id="sparkProj"></canvas>
+          </div>
+          <div class="kpi-card" style="animation-delay:0.15s">
+            <div class="corner-tl"></div><div class="corner-br"></div>
+            <div class="kpi-top">
+              <div class="kpi-label">VI LAUNCH COPIES</div>
+            </div>
+            <div class="kpi-value"><span id="kpiProjCopies">0</span><small>M</small></div>
+            <div class="kpi-sub" id="kpiProjCopiesSub">First-year estimated copies</div>
+            <canvas class="kpi-spark" id="sparkProjCopies"></canvas>
+          </div>
+          <div class="kpi-card" style="animation-delay:0.2s">
+            <div class="corner-tl"></div><div class="corner-br"></div>
+            <div class="kpi-top">
+              <div class="kpi-label">VI EST. TOTAL REVENUE</div>
+            </div>
+            <div class="kpi-value">₹<span id="kpiRevVI">0</span><small>CRORE</small></div>
+            <div class="kpi-sub">Lifetime projected revenue</div>
+            <canvas class="kpi-spark" id="sparkRevVI"></canvas>
+          </div>
+          <div class="kpi-card" style="animation-delay:0.25s">
+            <div class="corner-tl"></div><div class="corner-br"></div>
+            <div class="kpi-top">
+              <div class="kpi-label">VI EST. US SHARE</div>
+            </div>
+            <div class="kpi-value"><span id="kpiUsShare">0</span><small>%</small></div>
+            <div class="kpi-sub">Projected US market share</div>
+            <canvas class="kpi-spark" id="sparkUsShare"></canvas>
+          </div>
+          <div class="kpi-card" style="animation-delay:0.3s">
+            <div class="corner-tl"></div><div class="corner-br"></div>
+            <div class="kpi-top">
+              <div class="kpi-label">VI EST. INDIA SALES</div>
+            </div>
+            <div class="kpi-value"><span id="kpiIndiaSales">0</span><small>MILLION</small></div>
+            <div class="kpi-sub">Projected copies sold in India</div>
+            <canvas class="kpi-spark" id="sparkIndiaSales"></canvas>
+          </div>
+          <div class="kpi-card" style="animation-delay:0.35s">
+            <div class="corner-tl"></div><div class="corner-br"></div>
+            <div class="kpi-top">
+              <div class="kpi-label">VI AVG GAME PRICE</div>
+            </div>
+            <div class="kpi-value">₹<span id="kpiGamePrice">0</span></div>
+            <div class="kpi-sub">Base price per copy (~$70 USD)</div>
+            <canvas class="kpi-spark" id="sparkGamePrice"></canvas>
+          </div>
         </div>
 
-        <!-- GTA VI Projection -->
-        <div class="chart-card" style="animation-delay:0.8s">
-          <div class="card-head">
-            <div class="card-title">Launch Projection<small>GTA VI · Year One Estimate</small></div>
+        <!-- Charts Grid -->
+        <div class="charts-grid">
+          <!-- GTA VI Projection -->
+          <div class="chart-card" style="animation-delay:0.6s">
+            <div class="card-head">
+              <div class="card-title">Launch Projection Scenarios<small>GTA VI · Year One Estimate</small></div>
+            </div>
+            <div class="chart-box"><canvas id="projChart"></canvas></div>
+            <div class="scenario-row" id="scenarioRow"></div>
           </div>
-          <div class="chart-box"><canvas id="projChart"></canvas></div>
-          <div class="scenario-row" id="scenarioRow"></div>
-        </div>
 
-        <!-- Global Market Share World Map -->
-        <div class="chart-card map-card" style="animation-delay:0.9s; grid-column: span 2;">
-          <div class="card-head">
-            <div class="card-title">Global Sales Distribution<small>GTA V / VI Market Footprint & Revenue Share</small></div>
+          <!-- Top Markets Chart -->
+          <div class="chart-card" style="animation-delay:0.7s">
+            <div class="card-head">
+              <div class="card-title">Top 10 Global Markets<small>Projected Copies Sold (Million)</small></div>
+            </div>
+            <div class="chart-box"><canvas id="topCountriesChart"></canvas></div>
           </div>
-          <div class="chart-box" style="height: 300px;"><div id="world-map" style="width: 100%; height: 100%;"></div></div>
+
+          <!-- Global Market Share World Map -->
+          <div class="chart-card map-card" style="animation-delay:0.8s; grid-column: span 2;">
+            <div class="card-head">
+              <div class="card-title">Global Sales Distribution Map<small>Interactive Region-wise Copies & Revenue Share</small></div>
+            </div>
+            <div class="chart-box" style="height: 300px;"><div id="world-map" style="width: 100%; height: 100%;"></div></div>
+          </div>
         </div>
       </div>
     </div>
@@ -850,6 +1129,22 @@ const PROJECTIONS = [
   {Scenario:'Optimistic',   Copies:50, Revenue:25000, Assumption:'Record-breaking launch'},
 ];
 
+const BUDGET = [
+  {Game:'GTA V',  Dev:137, Mkt:128, Total:265, TotalINR:2200},
+  {Game:'GTA VI', Dev:600, Mkt:400, Total:1000, TotalINR:8300}
+];
+
+const PREORDERS = [
+  {Game:'GTA V',  Preorders:7.0,  LaunchDay:11.2, RevenueINR:2450},
+  {Game:'GTA VI', Preorders:15.0, LaunchDay:22.0, RevenueINR:7500}
+];
+
+const SOCIAL = [
+  {Platform:'Reddit',       V:1.2,  VI:1.8,  Unit:'M Subscribers'},
+  {Platform:'X (Twitter)',  V:0.85, VI:3.2,  Unit:'M Trailer Likes'},
+  {Platform:'Instagram Reels', V:4.5,  VI:28.4, Unit:'B Reels Views'}
+];
+
 /* ═══════════════════════════════════════════════════════════════
    PARTICLE SYSTEM
    ═══════════════════════════════════════════════════════════════ */
@@ -927,7 +1222,7 @@ const PROJECTIONS = [
    ═══════════════════════════════════════════════════════════════ */
 function staggerIn(selector, baseDelay = 0.3) {
   document.querySelectorAll(selector).forEach((el, i) => {
-    el.style.animation = `cardIn 0.6s ${baseDelay + i * 0.1}s var(--ease-out-expo) forwards`;
+    el.style.animation = `cardIn 0.6s ${baseDelay + i * 0.08}s var(--ease-out-expo) forwards`;
   });
 }
 // Add the keyframe dynamically
@@ -940,8 +1235,8 @@ styleSheet.textContent = `
 `;
 document.head.appendChild(styleSheet);
 
-staggerIn('.kpi-card', 0.3);
-staggerIn('.chart-card', 0.5);
+staggerIn('#tab-hype .kpi-card', 0.3);
+staggerIn('#tab-hype .chart-card', 0.5);
 
 /* ═══════════════════════════════════════════════════════════════
    UTILITIES
@@ -966,6 +1261,7 @@ setInterval(tickClock, 1000);
 tickClock();
 
 function countUp(el, target, opts = {}) {
+  if (!el) return;
   const dur = opts.duration || 1400;
   const decimals = opts.decimals || 0;
   const start = performance.now();
@@ -995,7 +1291,7 @@ function drawSparkline(canvasId, data, color) {
 
   const grad = ctx.createLinearGradient(0, 0, 0, H);
   grad.addColorStop(0, color.replace(')', ',0.4)').replace('rgb', 'rgba'));
-  grad.addColorStop(1, color.replace(')', ',0)').replace('rgb', 'rgba'));
+  grad.addColorStop(1, color.replace(')', ',0').replace('rgb', 'rgba'));
 
   ctx.beginPath();
   data.forEach((v, i) => {
@@ -1015,17 +1311,31 @@ function drawSparkline(canvasId, data, color) {
   ctx.fill();
 }
 
-setTimeout(() => {
+function initAllSparklines() {
   drawSparkline('sparkCopies', CUMULATIVE.map(c => c.Copies), 'rgb(242,169,59)');
   drawSparkline('sparkRevenue', CUMULATIVE.map(c => c.Revenue), 'rgb(155,107,255)');
   drawSparkline('sparkPeak', TRENDS.slice(-52).map(t => t.vi), 'rgb(255,61,127)');
   drawSparkline('sparkProj', [15000, 20000, 25000], 'rgb(47,230,196)');
   drawSparkline('sparkViews', [130.3, 150, 180, 220, 250, 286.1], 'rgb(0,212,255)');
-  drawSparkline('sparkLikes', [2.85, 4.5, 6.2, 8.1, 10.5, 12.43], 'rgb(255,115,0)');
-}, 800);
+  drawSparkline('sparkRevVI', [40000, 55000, 65000, 75000, 85000, 93490], 'rgb(255,115,0)');
+  drawSparkline('sparkSocial', [1.2, 1.8, 2.5, 3.2, 4.5, 5.2], 'rgb(0,212,255)');
+  drawSparkline('sparkBudget', [2200, 4500, 6500, 8300], 'rgb(47,230,196)');
+  drawSparkline('sparkProjCopies', [30, 40, 50], 'rgb(255,61,127)');
+  drawSparkline('sparkInstagram', [4.5, 8.2, 12.5, 18.0, 24.5, 28.4], 'rgb(0,212,255)');
+  drawSparkline('sparkReddit', [1.2, 1.3, 1.4, 1.5, 1.6, 1.8], 'rgb(242,169,59)');
+  drawSparkline('sparkXTweets', [0.85, 1.2, 1.8, 2.3, 2.9, 3.2], 'rgb(255,61,127)');
+  drawSparkline('sparkDevBudget', [137, 250, 400, 600], 'rgb(47,230,196)');
+  drawSparkline('sparkMktBudget', [128, 200, 300, 400], 'rgb(155,107,255)');
+  drawSparkline('sparkLaunchDay', [11.2, 14.5, 18.2, 22.0], 'rgb(255,61,127)');
+  drawSparkline('sparkUsShare', [30.5, 31.8, 32.5, 33.5], 'rgb(0,212,255)');
+  drawSparkline('sparkIndiaSales', [8.2, 10.5, 12.8, 15.0], 'rgb(47,230,196)');
+  drawSparkline('sparkGamePrice', [3500, 4000, 4500, 5000], 'rgb(242,169,59)');
+}
+
+setTimeout(initAllSparklines, 800);
 
 /* ═══════════════════════════════════════════════════════════════
-   KPIs
+   KPIs INITIALIZATION
    ═══════════════════════════════════════════════════════════════ */
 const lastCum = CUMULATIVE[CUMULATIVE.length - 1];
 setTimeout(() => {
@@ -1035,7 +1345,18 @@ setTimeout(() => {
   countUp(document.getElementById('kpiPeak'), peak.vi);
   document.getElementById('kpiPeakSub').innerHTML = `Week of <b>${peak.date}</b>`;
   countUp(document.getElementById('kpiViews'), 286.1, {decimals: 1});
-  countUp(document.getElementById('kpiLikes'), 12.4, {decimals: 1});
+  countUp(document.getElementById('kpiRevVI'), 93490);
+  countUp(document.getElementById('kpiSocial'), 5.2, {decimals: 1});
+  countUp(document.getElementById('kpiBudget'), 8300);
+  countUp(document.getElementById('kpiInstagram'), 28.4, {decimals: 1});
+  countUp(document.getElementById('kpiReddit'), 1.8, {decimals: 1});
+  countUp(document.getElementById('kpiXTweets'), 3.2, {decimals: 1});
+  countUp(document.getElementById('kpiDevBudget'), 4980);
+  countUp(document.getElementById('kpiMktBudget'), 3320);
+  countUp(document.getElementById('kpiLaunchDay'), 22.0, {decimals: 1});
+  countUp(document.getElementById('kpiUsShare'), 33.5, {decimals: 1});
+  countUp(document.getElementById('kpiIndiaSales'), 15.0, {decimals: 1});
+  countUp(document.getElementById('kpiGamePrice'), 5000);
 }, 500);
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1061,7 +1382,17 @@ const trailerChart = new Chart(trailerCtx, {
   },
   options: {
     responsive: true, maintainAspectRatio: false,
-    animation: { duration: 1000, easing: 'easeOutCubic' },
+    animation: {
+      duration: 1800, easing: 'easeOutQuart',
+      delay: (context) => {
+        let delay = 0;
+        if (context.type === 'data' && context.mode === 'default') {
+          delay = context.dataIndex * 200 + context.datasetIndex * 100;
+        }
+        return delay;
+      },
+      y: { from: (ctx) => ctx.chart.scales.y ? ctx.chart.scales.y.getPixelForValue(0) : 0 },
+    },
     plugins: {
       legend: { display: false },
       tooltip: {
@@ -1127,7 +1458,7 @@ const trendChart = new Chart(trendCtx, {
   },
   options: {
     responsive: true, maintainAspectRatio: false,
-    animation: { duration: 1200, easing: 'easeOutCubic' },
+    animation: false,
     interaction: { mode: 'index', intersect: false },
     plugins: {
       legend: {
@@ -1169,6 +1500,60 @@ document.querySelectorAll('#trendRangeChips .chip').forEach(chip => {
 });
 
 /* ═══════════════════════════════════════════════════════════════
+   SOCIAL BUZZ CHART
+   ═══════════════════════════════════════════════════════════════ */
+const socialCtx = document.getElementById('socialChart');
+const socialChart = new Chart(socialCtx, {
+  type: 'bar',
+  data: {
+    labels: SOCIAL.map(s => s.Platform),
+    datasets: [
+      {
+        label: 'GTA V',
+        data: SOCIAL.map(s => s.V),
+        backgroundColor: 'rgba(155,107,255,0.75)',
+        borderRadius: 6,
+        maxBarThickness: 28,
+        borderSkipped: false
+      },
+      {
+        label: 'GTA VI',
+        data: SOCIAL.map(s => s.VI),
+        backgroundColor: 'rgba(255,61,127,0.85)',
+        borderRadius: 6,
+        maxBarThickness: 28,
+        borderSkipped: false
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top', align: 'end',
+        labels: { boxWidth: 8, boxHeight: 8, usePointStyle: true, pointStyle: 'circle', font: MONO_FONT }
+      },
+      tooltip: {
+        backgroundColor: '#12151f', borderColor: 'rgba(255,255,255,0.1)',
+        borderWidth: 1, titleFont: MONO_FONT, bodyFont: MONO_FONT, padding: 10,
+        callbacks: {
+          label: ctx => {
+            const platform = SOCIAL[ctx.dataIndex];
+            const val = ctx.parsed.y;
+            return ` ${ctx.dataset.label}: ${val} ${platform.Unit.split(' ')[0] === 'M' ? 'Million' : 'Billion'}`;
+          }
+        }
+      }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: MONO_FONT } },
+      y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { font: { size: 9 } } }
+    }
+  }
+});
+
+/* ═══════════════════════════════════════════════════════════════
    CUMULATIVE CHART
    ═══════════════════════════════════════════════════════════════ */
 const cumCtx = document.getElementById('cumulativeChart');
@@ -1176,7 +1561,7 @@ const cumGrad = cumCtx.getContext('2d').createLinearGradient(0, 0, 0, 160);
 cumGrad.addColorStop(0, 'rgba(47,230,196,0.3)');
 cumGrad.addColorStop(1, 'rgba(47,230,196,0)');
 
-new Chart(cumCtx, {
+const cumulativeChart = new Chart(cumCtx, {
   data: {
     labels: CUMULATIVE.map(c => c.Year),
     datasets: [
@@ -1196,7 +1581,17 @@ new Chart(cumCtx, {
   },
   options: {
     responsive: true, maintainAspectRatio: false,
-    animation: { duration: 1200, easing: 'easeOutCubic' },
+    animation: {
+      duration: 2000, easing: 'easeOutQuart',
+      delay: (context) => {
+        let delay = 0;
+        if (context.type === 'data' && context.mode === 'default') {
+          delay = context.dataIndex * 120 + context.datasetIndex * 200;
+        }
+        return delay;
+      },
+      y: { from: (ctx) => ctx.chart.scales.y ? ctx.chart.scales.y.getPixelForValue(0) : 0 },
+    },
     interaction: { mode: 'index', intersect: false },
     plugins: {
       legend: {
@@ -1212,6 +1607,106 @@ new Chart(cumCtx, {
       x: { grid: { display: false }, ticks: { font: { size: 9 } } },
       y: { position: 'left', grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { font: { size: 9 } } },
       y1: { position: 'right', grid: { display: false }, ticks: { font: { size: 9 } } }
+    }
+  }
+});
+
+/* ═══════════════════════════════════════════════════════════════
+   BUDGET CHART
+   ═══════════════════════════════════════════════════════════════ */
+const budgetCtx = document.getElementById('budgetChart');
+const budgetChart = new Chart(budgetCtx, {
+  type: 'bar',
+  data: {
+    labels: BUDGET.map(b => b.Game),
+    datasets: [
+      {
+        label: 'Development Budget',
+        data: BUDGET.map(b => b.Dev),
+        backgroundColor: 'rgba(47,230,196,0.85)',
+        borderRadius: 5,
+        maxBarThickness: 32,
+        borderSkipped: false
+      },
+      {
+        label: 'Marketing Budget',
+        data: BUDGET.map(b => b.Mkt),
+        backgroundColor: 'rgba(155,107,255,0.85)',
+        borderRadius: 5,
+        maxBarThickness: 32,
+        borderSkipped: false
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top', align: 'end',
+        labels: { boxWidth: 8, boxHeight: 8, usePointStyle: true, pointStyle: 'circle', font: MONO_FONT }
+      },
+      tooltip: {
+        backgroundColor: '#12151f', borderColor: 'rgba(255,255,255,0.1)',
+        borderWidth: 1, titleFont: MONO_FONT, bodyFont: MONO_FONT, padding: 10,
+        callbacks: {
+          label: ctx => ` ${ctx.dataset.label}: $${ctx.parsed.y}M (~₹${fmtNum(ctx.parsed.y * 8.3)} Cr)`
+        }
+      }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: MONO_FONT } },
+      y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { font: { size: 9 } } }
+    }
+  }
+});
+
+/* ═══════════════════════════════════════════════════════════════
+   PREORDER CHART
+   ═══════════════════════════════════════════════════════════════ */
+const preorderCtx = document.getElementById('preorderChart');
+const preorderChart = new Chart(preorderCtx, {
+  type: 'bar',
+  data: {
+    labels: PREORDERS.map(p => p.Game),
+    datasets: [
+      {
+        label: 'Pre-Orders Sold',
+        data: PREORDERS.map(p => p.Preorders),
+        backgroundColor: 'rgba(242,169,59,0.85)',
+        borderRadius: 6,
+        maxBarThickness: 36,
+        borderSkipped: false
+      },
+      {
+        label: 'Launch Day Sales',
+        data: PREORDERS.map(p => p.LaunchDay),
+        backgroundColor: 'rgba(255,61,127,0.85)',
+        borderRadius: 6,
+        maxBarThickness: 36,
+        borderSkipped: false
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top', align: 'end',
+        labels: { boxWidth: 8, boxHeight: 8, usePointStyle: true, pointStyle: 'circle', font: MONO_FONT }
+      },
+      tooltip: {
+        backgroundColor: '#12151f', borderColor: 'rgba(255,255,255,0.1)',
+        borderWidth: 1, titleFont: MONO_FONT, bodyFont: MONO_FONT, padding: 10,
+        callbacks: {
+          label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y}M Copies (~₹${fmtNum(ctx.parsed.y * 500)} Cr)`
+        }
+      }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: MONO_FONT } },
+      y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { font: { size: 9 } } }
     }
   }
 });
@@ -1240,7 +1735,17 @@ const projChart = new Chart(projCtx, {
   },
   options: {
     responsive: true, maintainAspectRatio: false,
-    animation: { duration: 900, easing: 'easeOutCubic' },
+    animation: {
+      duration: 1600, easing: 'easeOutQuart',
+      delay: (context) => {
+        let delay = 0;
+        if (context.type === 'data' && context.mode === 'default') {
+          delay = context.dataIndex * 200 + context.datasetIndex * 150;
+        }
+        return delay;
+      },
+      y: { from: (ctx) => ctx.chart.scales.y ? ctx.chart.scales.y.getPixelForValue(0) : 0 },
+    },
     plugins: {
       legend: {
         position: 'top', align: 'end',
@@ -1265,6 +1770,7 @@ const projChart = new Chart(projCtx, {
 
 function renderScenarioButtons() {
   const row = document.getElementById('scenarioRow');
+  if (!row) return;
   row.innerHTML = '';
   PROJECTIONS.forEach(p => {
     const btn = document.createElement('div');
@@ -1280,8 +1786,15 @@ function updateScenario() {
   projChart.data.datasets[1].backgroundColor = PROJECTIONS.map(p => p.Scenario === activeScenario ? PINK : 'rgba(255,61,127,0.2)');
   projChart.update();
   const sc = PROJECTIONS.find(p => p.Scenario === activeScenario);
-  document.getElementById('kpiProjSub').innerHTML = `Scenario: <b>${sc.Scenario}</b>`;
+  
+  const elSub = document.getElementById('kpiProjSub');
+  if (elSub) elSub.innerHTML = `Scenario: <b>${sc.Scenario}</b>`;
   countUp(document.getElementById('kpiProj'), sc.Revenue, { duration: 800 });
+
+  const elCopies = document.getElementById('kpiProjCopies');
+  const elCopiesSub = document.getElementById('kpiProjCopiesSub');
+  if (elCopies) countUp(elCopies, sc.Copies, { duration: 800 });
+  if (elCopiesSub) elCopiesSub.innerHTML = `Scenario: <b>${sc.Scenario}</b>`;
 }
 renderScenarioButtons();
 updateScenario();
@@ -1290,21 +1803,19 @@ updateScenario();
    WORLD MAP (Global Sales Distribution)
    ═══════════════════════════════════════════════════════════════ */
 const countrySalesData = {
-  US: { copies: 72, revenue: 25200, share: 24.2, name: "United States" },
-  GB: { copies: 20, revenue: 7000, share: 6.7, name: "United Kingdom" },
-  CA: { copies: 18, revenue: 6300, share: 6.1, name: "Canada" },
-  DE: { copies: 16, revenue: 5600, share: 5.4, name: "Germany" },
-  FR: { copies: 13, revenue: 4550, share: 4.4, name: "France" },
-  AU: { copies: 12, revenue: 4200, share: 4.0, name: "Australia" },
-  JP: { copies: 18, revenue: 6300, share: 6.1, name: "Japan" },
-  BR: { copies: 14, revenue: 4900, share: 4.7, name: "Brazil" },
-  MX: { copies: 11, revenue: 3850, share: 3.7, name: "Mexico" },
-  IT: { copies: 10, revenue: 3500, share: 3.4, name: "Italy" },
-  ES: { copies: 9, revenue: 3150, share: 3.0, name: "Spain" },
-  NL: { copies: 8, revenue: 2800, share: 2.7, name: "Netherlands" },
-  SE: { copies: 7, revenue: 2450, share: 2.4, name: "Sweden" },
-  KR: { copies: 10, revenue: 3500, share: 3.4, name: "South Korea" },
-  PL: { copies: 6, revenue: 2100, share: 2.0, name: "Poland" }
+  US: { copies: 72, revenue: 25200, share: 33.5, name: "United States" },
+  CA: { copies: 9,  revenue: 3150,  share: 4.2,  name: "Canada" },
+  GB: { copies: 20, revenue: 7000,  share: 9.3,  name: "United Kingdom" },
+  DE: { copies: 16, revenue: 5600,  share: 7.4,  name: "Germany" },
+  FR: { copies: 13, revenue: 4550,  share: 6.0,  name: "France" },
+  IT: { copies: 9,  revenue: 3150,  share: 4.2,  name: "Italy" },
+  JP: { copies: 18, revenue: 6300,  share: 8.4,  name: "Japan" },
+  IN: { copies: 15, revenue: 5250,  share: 7.0,  name: "India" },
+  KR: { copies: 10, revenue: 3500,  share: 4.7,  name: "South Korea" },
+  AU: { copies: 9,  revenue: 3150,  share: 4.2,  name: "Australia" },
+  BR: { copies: 14, revenue: 4900,  share: 6.5,  name: "Brazil" },
+  AE: { copies: 5,  revenue: 1750,  share: 2.3,  name: "United Arab Emirates" },
+  ZA: { copies: 5,  revenue: 1750,  share: 2.3,  name: "South Africa" }
 };
 
 const map = new jsVectorMap({
@@ -1327,39 +1838,6 @@ const map = new jsVectorMap({
       fill: "#f2a93b",
       fillOpacity: 1,
       cursor: "pointer"
-    }
-  },
-
-  visualizeData: {
-    // Highlight color changed to #f2a93b
-    scale: [
-      "rgba(242, 169, 59, 0.25)",
-      "#f2a93b"
-    ],
-
-    values: {
-      // North America
-      US: 72,
-      CA: 18,
-      MX: 11,
-
-      // Europe
-      GB: 20,
-      DE: 16,
-      FR: 13,
-      IT: 10,
-      ES: 9,
-      NL: 8,
-      SE: 7,
-      PL: 6,
-
-      // Asia-Pacific
-      JP: 18,
-      KR: 10,
-      AU: 12,
-
-      // South America
-      BR: 14
     }
   },
 
@@ -1398,6 +1876,104 @@ const map = new jsVectorMap({
       );
     }
   }
+});
+
+/* ═══════════════════════════════════════════════════════════════
+   TOP 10 COUNTRIES CHART (NEW)
+   ═══════════════════════════════════════════════════════════════ */
+const topCountriesCtx = document.getElementById('topCountriesChart');
+const sortedCountries = Object.values(countrySalesData)
+  .sort((a, b) => b.copies - a.copies)
+  .slice(0, 10);
+
+const topCountriesChart = new Chart(topCountriesCtx, {
+  type: 'bar',
+  data: {
+    labels: sortedCountries.map(c => c.name),
+    datasets: [{
+      label: 'Copies Sold (M)',
+      data: sortedCountries.map(c => c.copies),
+      backgroundColor: 'rgba(0, 212, 255, 0.75)',
+      borderColor: '#00d4ff',
+      borderWidth: 1,
+      borderRadius: 4,
+      maxBarThickness: 16,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#12151f', borderColor: 'rgba(255,255,255,0.1)',
+        borderWidth: 1, titleFont: MONO_FONT, bodyFont: MONO_FONT, padding: 8,
+        callbacks: {
+          label: ctx => ` Copies: ${ctx.parsed.x}M (~₹${fmtNum(sortedCountries[ctx.dataIndex].revenue)} Cr)`
+        }
+      }
+    },
+    scales: {
+      x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { font: { size: 8 } } },
+      y: { grid: { display: false }, ticks: { color: '#f3ecdf', font: { size: 9, family: "'JetBrains Mono', monospace" } } }
+    }
+  }
+});
+
+/* ═══════════════════════════════════════════════════════════════
+   TAB switching CONTROLLER
+   ═══════════════════════════════════════════════════════════════ */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    
+    btn.classList.add('active');
+    const tabName = btn.dataset.tab;
+    const tabContent = document.getElementById(`tab-${tabName}`);
+    if (tabContent) {
+      tabContent.classList.add('active');
+      
+      // Stagger animations for cards in the newly visible tab
+      staggerIn(`#tab-${tabName} .kpi-card`, 0.1);
+      staggerIn(`#tab-${tabName} .chart-card`, 0.2);
+      
+      // Force resize/redraw of charts inside hidden containers to fix Chart.js width issues
+      if (tabName === 'hype') {
+        trailerChart.resize();
+        trendChart.resize();
+        socialChart.resize();
+      } else if (tabName === 'financials') {
+        cumulativeChart.resize();
+        budgetChart.resize();
+        preorderChart.resize();
+      } else if (tabName === 'projections') {
+        projChart.resize();
+        topCountriesChart.resize();
+        // Redraw vector map
+        if (map && typeof map.updateSize === 'function') {
+          map.updateSize();
+        }
+      }
+      
+      // Re-draw sparklines to fit new sizes
+      initAllSparklines();
+    }
+  });
+
+  // Block right-click context menu (Inspect)
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  // Block common developer tools keyboard shortcuts (F12, Ctrl+Shift+I/J/C, Ctrl+U)
+  document.addEventListener('keydown', e => {
+    if (
+      e.key === 'F12' ||
+      (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key.toUpperCase())) ||
+      (e.ctrlKey && e.key.toUpperCase() === 'U')
+    ) {
+      e.preventDefault();
+    }
+  });
 });
 </script>
 </body>

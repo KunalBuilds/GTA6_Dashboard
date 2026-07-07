@@ -49,7 +49,7 @@ revenue (₹)
 
 ## Module 3 --- Social Media Analysis
 
-Platforms: - YouTube - Reddit - X (Twitter) - Instagram - TikTok
+Platforms: - YouTube - Reddit - X (Twitter) - Instagram Reels
 
 Metrics: - Posts - Likes - Comments - Shares - Engagement Rate
 
