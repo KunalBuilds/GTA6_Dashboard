@@ -555,18 +555,144 @@
     .kpi-row { grid-template-columns: repeat(3, 1fr); }
   }
   @media (max-height: 680px), (max-width: 900px) {
-    html, body { overflow: auto; }
-    .shell { height: auto; min-height: 100vh; }
+    html, body { overflow-y: auto; overflow-x: hidden; }
+    .shell { height: auto; min-height: 100vh; padding: 10px; }
     .main-content { flex-direction: column; }
-    .sidebar { flex: 0 0 auto; }
-    .hero-card { min-height: 220px; }
-    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .left-panel { flex: 0 0 auto; width: 100%; }
+    .right-content { overflow-y: visible; padding-right: 0; }
+    .kpi-row { grid-template-columns: repeat(3, 1fr); }
     .charts-grid { grid-template-columns: 1fr; grid-template-rows: none; }
-    .chart-card { min-height: 280px; }
+    .chart-card { grid-column: span 1 !important; min-height: 280px; }
+  }
+  @media (max-width: 768px) {
+    .left-panel {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      grid-template-rows: auto auto;
+      gap: 10px 16px;
+      padding: 14px;
+    }
+    .left-panel .glow {
+      display: none;
+    }
+    .left-panel .eyebrow {
+      grid-column: 1 / -1;
+      padding: 0;
+      margin: 0;
+    }
+    .left-panel .hero-img-wrap {
+      grid-column: 1;
+      grid-row: 2;
+      height: 120px;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: none;
+    }
+    .left-panel .hero-img-wrap img {
+      max-height: 100%;
+      width: auto;
+    }
+    .left-panel .hero-caption {
+      grid-column: 2;
+      grid-row: 2;
+      padding: 0;
+      border-top: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .left-panel .hero-caption .h-title {
+      font-size: 15px;
+    }
+    .left-panel .hero-caption .h-sub {
+      font-size: 8px;
+    }
+    .left-panel .sources-panel {
+      grid-column: 1 / -1;
+      border-top: 1px dashed var(--border);
+      padding: 8px 0 0 0;
+      margin-top: 4px;
+    }
+    .sources-panel .src-title {
+      font-size: 8px;
+      margin-bottom: 4px;
+    }
+    .sources-panel .src-list {
+      gap: 4px 6px;
+    }
+    .sources-panel .src-list li {
+      font-size: 8px;
+      padding: 2px 6px;
+    }
   }
   @media (max-width: 600px) {
-    .kpi-row { grid-template-columns: 1fr; }
-    .sidebar { flex: 0 0 auto; }
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 10px 14px;
+    }
+    header h1 {
+      font-size: 13px;
+    }
+    header p {
+      font-size: 8px;
+    }
+    .status {
+      width: 100%;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      padding-top: 6px;
+    }
+    .tabs-nav {
+      width: 100%;
+    }
+    .tab-btn {
+      flex: 1;
+      justify-content: center;
+      font-size: 9px;
+      padding: 8px 4px;
+      letter-spacing: 0.5px;
+      gap: 4px;
+    }
+    .kpi-row {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .kpi-card {
+      padding: 10px;
+    }
+    .kpi-value {
+      font-size: 20px;
+      margin-top: 4px;
+    }
+    .kpi-value small {
+      font-size: 8px;
+    }
+    .kpi-label {
+      font-size: 8px;
+      letter-spacing: 0.8px;
+    }
+    .kpi-sub {
+      font-size: 8px;
+    }
+    .map-card {
+      min-height: 350px;
+    }
+    footer {
+      flex-direction: column;
+      gap: 6px;
+      padding: 10px 14px;
+      text-align: center;
+    }
+  }
+  @media (max-width: 400px) {
+    .kpi-row {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* jsVectorMap customizations */
@@ -2007,6 +2133,15 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
       e.preventDefault();
     }
   });
+});
+
+// Redraw sparklines on window resize to ensure correct width fitting
+let resizeTimeout;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(() => {
+    initAllSparklines();
+  }, 150);
 });
 </script>
 </body>
