@@ -114,13 +114,13 @@
 
   .brand { display: flex; align-items: center; gap: 12px; }
   .brand-mark {
-    width: 42px; height: 42px;
+    width: 50px; height: 50px;
     display: flex; align-items: center; justify-content: center;
     font-family: var(--disp); font-weight: 700; font-size: 18px;
     color: var(--bg-void);
-    background: linear-gradient(135deg, var(--amber) 0%, #e6853a 100%);
+    background: transparent;
     border-radius: 10px;
-    box-shadow: 0 0 20px rgba(242, 169, 59, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+    box-shadow: 0 0 20px rgba(242, 169, 59, 0.35);
     animation: brandPulse 3s ease-in-out infinite;
     position: relative;
   }
@@ -164,6 +164,48 @@
   @keyframes pulseDot {
     0%, 100% { opacity: 1; transform: scale(1); }
     50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .brand-logo {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .work-together-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--amber);
+    text-decoration: none;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: rgba(242, 169, 59, 0.03);
+    transition: all 0.25s var(--ease-out-expo);
+  }
+  .work-together-link:hover {
+    color: #1a1206;
+    background: var(--amber);
+    border-color: var(--amber);
+    box-shadow: 0 0 12px rgba(242, 169, 59, 0.35);
+    transform: translateY(-1px);
+  }
+  .work-together-link svg {
+    width: 12px;
+    height: 12px;
+    stroke-width: 2.5;
+  }
+  @media (max-width: 480px) {
+    .work-together-link span {
+      display: none;
+    }
+    .work-together-link {
+      padding: 4px 6px;
+    }
   }
 
   /* ——— Main content ——— */
@@ -697,12 +739,13 @@
 
   /* jsVectorMap customizations */
   .jvm-tooltip {
-    background: rgba(18, 21, 31, 0.9) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background: #0a0d16 !important;
+    border: 1px solid rgba(242, 169, 59, 0.3) !important;
     border-radius: 8px !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
-    backdrop-filter: blur(10px) !important;
-    padding: 8px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(242, 169, 59, 0.1) !important;
+    backdrop-filter: none !important;
+    padding: 10px !important;
+    opacity: 1 !important;
   }
   .jvm-zoom-btn {
     background: rgba(255, 255, 255, 0.05) !important;
@@ -798,13 +841,24 @@
   <!-- Header -->
   <header>
     <div class="brand">
-      <div class="brand-mark">VI</div>
+      <div class="brand-mark">
+        <img src="images/gta6 logo.png" alt="GTA VI" class="brand-logo">
+      </div>
       <div>
         <h1>GTA VI <span>INTELLIGENCE</span> DASHBOARD</h1>
         <p>Sales · Search Demand · Trailer Performance · Launch Projections</p>
       </div>
     </div>
     <div class="status">
+      <a href="https://www.linkedin.com/in/kunal-meena-8702101a8/" target="_blank" rel="noopener noreferrer" class="work-together-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+          <rect x="2" y="9" width="4" height="12"></rect>
+          <circle cx="4" cy="4" r="2"></circle>
+        </svg>
+        <span>LET'S WORK TOGETHER</span>
+      </a>
+      <span style="opacity:.3">|</span>
       <span class="dot"></span><span>LIVE FEED</span>
       <span style="opacity:.3">|</span>
       <span id="clock">--:--:--</span>
